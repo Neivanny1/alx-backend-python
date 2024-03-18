@@ -10,7 +10,17 @@ from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-async def wait_n(n: int, max_delay: int) -> List[float]:
-    tasks = [wait_random(max_delay) for _ in range(n)]
-    delays = await asyncio.gather(*tasks)
+async def wait_n(n: int, max_delay: int = 10) -> List[float]:
+    """
+    Waits for ran delay until max_delay, returns list of actual delays
+    """
+    spawns = []
+    delays = []
+    for i in range(n):
+        delayed_task = asyncio.create_task(wait_random(max_delay))
+        delayed_task.add_done_callback(lambda x: delays.append(x.result()))
+        spawns.append(delayed_task)
+
+    for spawn in spawns:
+        await spawn
     return delays
