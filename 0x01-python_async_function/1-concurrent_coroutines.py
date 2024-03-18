@@ -4,8 +4,8 @@ A couritine that return the list of all the delays (float values).
 The list of the delays are in ascending order without
 using sort() because of concurrency.
 """
-import random
 import asyncio
+import random
 from typing import List
 wait_random = __import__('0-basic_async_syntax').wait_random
 
