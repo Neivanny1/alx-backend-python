@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 A couritine that return the list of all the delays (float values).
 The list of the delays are in ascending order without
